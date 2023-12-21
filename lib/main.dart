@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_auth/core/storage/storage.dart';
 import 'package:flutter_auth/view/splash_screen.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await StorageRepository.getInstance();
   runApp(const MyApp());
 }
 
