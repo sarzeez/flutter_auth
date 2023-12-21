@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_auth/view/splash_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -26,6 +27,6 @@ class RootPage extends StatefulWidget {
 class _RootPageState extends State<RootPage> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold();
+    return const SplashScreen();
   }
 }
