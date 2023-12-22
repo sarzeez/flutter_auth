@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_auth/core/storage/storage.dart';
 import 'package:flutter_auth/core/storage/storage_keys.dart';
-import 'package:flutter_auth/view/home_page.dart';
+import 'package:flutter_auth/view/login_page.dart';
 
 class WelcomePage extends StatefulWidget {
   const WelcomePage({super.key});
@@ -15,7 +15,7 @@ class _WelcomePageState extends State<WelcomePage> {
     Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute(
-          builder: (context) => const HomePage(),
+          builder: (context) => const LoginPage(),
         ),
         (route) => false);
 
@@ -44,14 +44,14 @@ class _WelcomePageState extends State<WelcomePage> {
             ),
             MaterialButton(
               onPressed: navigateToLogin,
-              color: Colors.white,
+              color: Colors.blue,
               padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 7),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12), // <-- Radius
               ),
               child: const Text(
-                'Login',
-                style: TextStyle(fontSize: 20),
+                'Continue',
+                style: TextStyle(fontSize: 20, color: Colors.white),
               ),
             )
           ],

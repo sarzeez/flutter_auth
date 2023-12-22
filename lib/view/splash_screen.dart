@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_auth/core/storage/storage.dart';
 import 'package:flutter_auth/core/storage/storage_keys.dart';
 import 'package:flutter_auth/view/home_page.dart';
+import 'package:flutter_auth/view/login_page.dart';
 import 'package:flutter_auth/view/welcome_page.dart';
+import 'package:jwt_decoder/jwt_decoder.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -14,7 +16,7 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
-    Future.delayed(const Duration(seconds: 3)).then((value) {
+    Future.delayed(const Duration(milliseconds: 800)).then((value) {
       _checkAccessToken();
     });
     super.initState();
@@ -22,6 +24,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   void _checkAccessToken() {
     // check token is invalid then navigate to login page otherwise navigat to home page
+    String? token = StorageRepository.getString(StorageKeys.token);
 
     if (StorageRepository.getBool(StorageKeys.isNew, defValue: true)) {
       Future.delayed(Duration.zero).then(
@@ -30,6 +33,17 @@ class _SplashScreenState extends State<SplashScreen> {
               context,
               MaterialPageRoute(
                 builder: (context) => const WelcomePage(),
+              ),
+              (route) => false);
+        },
+      );
+    } else if (token == null || JwtDecoder.isExpired(token)) {
+      Future.delayed(Duration.zero).then(
+        (value) {
+          Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const LoginPage(),
               ),
               (route) => false);
         },
