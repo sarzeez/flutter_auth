@@ -50,4 +50,9 @@ class StorageRepository {
     if (_preferences == null) return defValue;
     return _preferences!.getBool(key) ?? defValue;
   }
+
+  static Future<bool>? delete(String key) {
+    if (_preferences == null) return null;
+    return _preferences!.remove(key);
+  }
 }
